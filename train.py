@@ -36,7 +36,7 @@ def main (args):
 
     optimizer = torch.optim.Adam(mod.parameters(), lr=LR) 
 
-    scheduler = CosineAnnealingLR(optimizer, T_max=10*LR)
+    scheduler = CosineAnnealingLR(optimizer, NUM_EPOCHS / 10)
 
     for epoch in range(NUM_EPOCHS):
         for data in train_loader:
