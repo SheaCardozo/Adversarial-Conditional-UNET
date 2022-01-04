@@ -18,9 +18,9 @@ def main (args):
     GAMMA = args.gamma
 
 
-    torch.manual_seed(SEED)
+    #torch.manual_seed(SEED)
     torch.backends.cudnn.benchmark = False
-    torch.backends.cudnn.deterministic = True
+    #torch.backends.cudnn.deterministic = True
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
