@@ -1,6 +1,6 @@
 import torch
 from torch.utils.data import DataLoader
-from torch.optim.lr_scheduler import ExponentialLR
+from torch.optim.lr_scheduler import CosineAnnealingLR
 
 from utils import extract_cifar, get_model_sets
 from models import CIFAR10Dataset, UNet, final_loss
@@ -13,7 +13,6 @@ def main (args):
     SEED = args.seed
     BATCH_SIZE = args.batch_size
     LR = args.learning_rate
-    LR_DECAY = args.lr_decay
     NUM_EPOCHS = args.num_epochs
     CHECKPOINT_INTERVAL = args.checkpoints
 
@@ -37,7 +36,7 @@ def main (args):
 
     optimizer = torch.optim.Adam(mod.parameters(), lr=LR) 
 
-    scheduler = ExponentialLR(optimizer, gamma=LR_DECAY)
+    scheduler = CosineAnnealingLR(optimizer, T_max=10*LR)
 
     for epoch in range(NUM_EPOCHS):
         for data in train_loader:
