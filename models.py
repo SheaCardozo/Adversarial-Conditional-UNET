@@ -142,6 +142,6 @@ class UNet(torch.nn.Module):
 
 
 def final_loss(target_p, adv_p, recon, img, weight=1):
-    BCE = F.bceloss(F.softmax(adv_p, dim=1), target_p, reduction="mean")
-    MSE = F.mseloss(recon, img, reduction="mean")
+    BCE = F.binary_cross_entropy(F.softmax(adv_p, dim=1), target_p, reduction="mean")
+    MSE = F.mse_loss(recon, img, reduction="mean")
     return BCE + weight*MSE
