@@ -13,7 +13,7 @@ def unpickle(file):
         dict = pickle.load(fo, encoding='bytes')
     return dict
 
-def extract_cifar(folder="cifar-10-batches-py"):
+def extract_cifar(folder="CIFAR10/cifar-10-batches-py"):
     X = None
     y = None
     for i in range(1, 6):
