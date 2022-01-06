@@ -125,7 +125,7 @@ class UNet(torch.nn.Module):
                     LinSkip(out),
                     LinSkip(out),
                     torch.nn.Linear(out, out),
-                    torch.nn.Sigmoid(),
+                    #torch.nn.Sigmoid(),
             )
 
         if torch.cuda.is_available():
@@ -138,7 +138,7 @@ class UNet(torch.nn.Module):
         x = self.start(x)
         x = self.net(x, c)
         x = self.out(x)
-        return 2*x - 1
+        return x
 
 
 def final_loss(target_p, adv_p, recon, img, weight=1):
