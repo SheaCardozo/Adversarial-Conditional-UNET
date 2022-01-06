@@ -16,6 +16,7 @@ def main (args):
     NUM_EPOCHS = args.num_epochs
     CHECKPOINT_INTERVAL = args.checkpoints
     GAMMA = args.gamma
+    WEIGHT = args.mse_weight
 
 
     #torch.manual_seed(SEED)
@@ -54,7 +55,7 @@ def main (args):
             recon = mod(img.view((-1, 3072)), target_p).view((-1, 3, 32, 32)) + img
             adv_p = amod(recon)
                     
-            loss = final_loss(target_p, adv_p, recon, img, weight=1)
+            loss = final_loss(target_p, adv_p, recon, img, weight=WEIGHT)
             loss.backward()
             
             optimizer.step()
@@ -79,6 +80,7 @@ if __name__ == "__main__":
     parser.add_argument("--gamma", type=float, default=0.99)
     parser.add_argument("--num_epochs", type=int, default=100)
     parser.add_argument("--checkpoints", type=int, default=100)
+    parser.add_argument("--mse_weight", type=int, default=1)
 
     args = parser.parse_args()
     main(args)
